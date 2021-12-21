@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     private float speed;
     private Rigidbody rb;
 
+    public GameObject leftFist;
+
     public Transform target;
     public NavMeshAgent agent;
     public LayerMask whatIsGround, whatIsPlayer;
@@ -25,6 +27,14 @@ public class Enemy : MonoBehaviour
 
     public enum StateEnum { Idle, Roam, Chase, Attack, Stagger}
     public StateEnum state;
+
+    // animation things
+    Animator animator;
+    private string currentState;
+
+    const string DEMON_IDLE = "metarig|Idle";
+    const string DEMON_RUN = "metarig|Walk";
+    const string DEMON_ATTACK = "metarig|Idle_002";
    
     private void CheckState()
     {
@@ -45,6 +55,16 @@ public class Enemy : MonoBehaviour
     {
         //agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+    }
+
+    void ChangeAnimationState(string newState)
+    {
+        if (currentState == newState) return;
+
+        animator.Play(newState);
+
+        currentState = newState;
     }
 
     private void Update()
@@ -79,12 +99,18 @@ public class Enemy : MonoBehaviour
 
     void IdleBehaviour()
     {
+        leftFist.GetComponent<Collider>().enabled = false;
         Debug.Log("Idle");
+
+        ChangeAnimationState(DEMON_IDLE);
     }
 
     void ChaseBehaviour()
     {
+        leftFist.GetComponent<Collider>().enabled = false;
+
         agent.SetDestination(target.position);
+        ChangeAnimationState(DEMON_RUN);
     }
 
     void AttackBehaviour()
@@ -115,6 +141,8 @@ public class Enemy : MonoBehaviour
     void Attack()
     {
         Debug.Log("Attack");
+        ChangeAnimationState(DEMON_ATTACK);
+        leftFist.GetComponent<Collider>().enabled = true;
     }
 
     private void OnDrawGizmosSelected()
