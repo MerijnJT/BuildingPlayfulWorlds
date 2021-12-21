@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "6b6aa444-06b6-c040-9942-5b79c84ac9be": {
+      "ProjectGuid": "6b6aa444-06b6-c040-9942-5b79c84ac9be",
+      "DisplayName": "Assembly-CSharp",
+      "ColorIndex": 0
+    },
+    "b06950cc-678c-2248-0ebe-32f876e39178": {
+      "ProjectGuid": "b06950cc-678c-2248-0ebe-32f876e39178",
+      "DisplayName": "Unity.Postprocessing.Runtime",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
