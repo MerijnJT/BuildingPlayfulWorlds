@@ -11,6 +11,9 @@ public class playerManager : MonoBehaviour
     public int currentHealth;
 
     public HealthBar healthBar;
+
+    public GameObject gameOverScreen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,15 @@ public class playerManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("You Die");
+            FindObjectOfType<GameManager>().EndGame();
+
+            gameOverScreen.SetActive(true);
+            Time.timeScale = 0f;
+            UnityEngine.Cursor.visible = true;
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
+
+
+
         }
     }
 }

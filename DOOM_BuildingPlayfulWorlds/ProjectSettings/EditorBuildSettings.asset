@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 6d223d211f0b4c449a7bf456c4052aa9
+  - enabled: 1
+    path: Assets/Scenes/DOOM.unity
+    guid: 43855ffb31055194395167da6c502c77
   m_configObjects: {}

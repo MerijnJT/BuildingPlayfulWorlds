@@ -74,13 +74,13 @@ public class Enemy : MonoBehaviour
         CheckState();
         speed = rb.velocity.magnitude;
         
-        if (playerInSightRange && !playerInAttackRange)
+        if (playerInSightRange && !playerInAttackRange && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
             state = StateEnum.Chase;
         }
         if (playerInAttackRange)
         {
-            state |= StateEnum.Attack;
+            state = StateEnum.Attack;
         }
     }
     public void TakeDamage (float amount)
@@ -141,8 +141,13 @@ public class Enemy : MonoBehaviour
     void Attack()
     {
         Debug.Log("Attack");
-        ChangeAnimationState(DEMON_ATTACK);
-        leftFist.GetComponent<Collider>().enabled = true;
+
+        if (currentState != DEMON_ATTACK)
+        {
+            ChangeAnimationState(DEMON_ATTACK);
+            leftFist.GetComponent<Collider>().enabled = true;
+        }
+        
     }
 
     private void OnDrawGizmosSelected()
