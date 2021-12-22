@@ -15,6 +15,7 @@ public class gun : MonoBehaviour
 
     public ParticleSystem muzzle;
     public GameObject impact;
+    public GameObject blood;
 
     // Update is called once per frame
     void Update()
@@ -41,6 +42,7 @@ public class gun : MonoBehaviour
 
 
             RaycastHit hit;
+
             if (Physics.Raycast(fpsCam.transform.position, bloom, out hit, range))
             {
                 Debug.Log(hit.transform.name);
@@ -50,7 +52,18 @@ public class gun : MonoBehaviour
                     target.TakeDamage(damage);
                 }
 
-                Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
+                
+
+                if (hit.transform.tag == "Demon")
+                {
+                    GameObject wound = Instantiate(blood, hit.point, Quaternion.LookRotation(hit.normal));
+                    wound.transform.LookAt(hit.point + hit.normal);
+                    wound.transform.parent = hit.transform;
+                } else
+                {
+                    Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
+                }
+                
             }
         }
         yield return new WaitForSeconds(rate);

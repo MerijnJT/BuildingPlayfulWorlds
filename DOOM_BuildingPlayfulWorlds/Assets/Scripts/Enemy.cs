@@ -25,6 +25,9 @@ public class Enemy : MonoBehaviour
     public bool playerInSightRange;
     public bool playerInAttackRange;
 
+    public bool isWeak = false;
+    public GameObject explosion;
+
     public enum StateEnum { Idle, Roam, Chase, Attack, Stagger}
     public StateEnum state;
 
@@ -78,7 +81,7 @@ public class Enemy : MonoBehaviour
         {
             state = StateEnum.Chase;
         }
-        if (playerInAttackRange)
+        if (playerInAttackRange && !isWeak)
         {
             state = StateEnum.Attack;
         }
@@ -90,10 +93,16 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
+
+        if (health > 0f && health <= 40f)
+        {
+            state = StateEnum.Stagger;
+        }
     }
 
     void Die ()
     {
+        FindObjectOfType<Manager>().Explode(explosion, agent.transform.position);
         Destroy(gameObject);
     }
 
@@ -135,7 +144,13 @@ public class Enemy : MonoBehaviour
 
     void StaggerBehaviour()
     {
+        leftFist.GetComponent<Collider>().enabled = false;
 
+        //change shader
+
+        ChangeAnimationState(DEMON_IDLE);
+
+        isWeak = true;
     }
 
     void Attack()

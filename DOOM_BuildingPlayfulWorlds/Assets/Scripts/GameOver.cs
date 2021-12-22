@@ -9,6 +9,7 @@ public class GameOver : MonoBehaviour
    public void PlayAgain()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1;
     }
     
     

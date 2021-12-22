@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2019532615447395517}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Demon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,7 +138,10 @@ MonoBehaviour:
   attackRange: 3
   playerInSightRange: 0
   playerInAttackRange: 0
+  isWeak: 0
+  explosion: {fileID: 1025285306637258, guid: d8f0099df63275647a8bcf646df1ca00, type: 3}
   state: 0
+  gameManager: {fileID: 0}
 --- !u!54 &2825672773731576249
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -274,11 +277,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e41c7fb2005110d4dad2e8c30440313f, type: 3}
   m_PrefabInstance: {fileID: 6730111051561119209}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6039646306430250286 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8163044774253870905, guid: e41c7fb2005110d4dad2e8c30440313f, type: 3}
-  m_PrefabInstance: {fileID: 6730111051561119209}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1842107796770664947 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4969250635741731866, guid: e41c7fb2005110d4dad2e8c30440313f, type: 3}
@@ -297,17 +295,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
---- !u!64 &882807825268425895
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6039646306430250286}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1863131756616618180, guid: e41c7fb2005110d4dad2e8c30440313f, type: 3}

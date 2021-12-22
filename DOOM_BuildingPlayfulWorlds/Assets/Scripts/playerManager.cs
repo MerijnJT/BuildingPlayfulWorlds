@@ -39,7 +39,7 @@ public class playerManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("You Die");
-            FindObjectOfType<GameManager>().EndGame();
+            FindObjectOfType<Manager>().EndGame();
 
             gameOverScreen.SetActive(true);
             Time.timeScale = 0f;
@@ -50,4 +50,6 @@ public class playerManager : MonoBehaviour
 
         }
     }
+
+    
 }
