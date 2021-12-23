@@ -13,6 +13,9 @@ public class playerManager : MonoBehaviour
 
     public HealthBar healthBar;
     public GameObject vignette;
+    public GameObject bloedregelaar;
+    public UnityEngine.UI.Image bloed;
+
 
     public GameObject gameOverScreen;
     public GameObject executeOverlay;
@@ -120,6 +123,9 @@ public class playerManager : MonoBehaviour
         { currentHealth = currentHealth + 50; }
        else { currentHealth = currentHealth + (maxHealth - currentHealth); }
         healthBar.ChangeHealth(currentHealth);
+
+        bloedregelaar.GetComponent<Bloed>().Executing(bloed);
+       
     }
 
 }
