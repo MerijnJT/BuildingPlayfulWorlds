@@ -26,7 +26,13 @@ public class Enemy : MonoBehaviour
     public bool playerInAttackRange;
 
     public bool isWeak = false;
+    public float staggerTime = 3f;
     public GameObject explosion;
+
+    public Material originalColor;
+    public Material staggerColor;
+
+    public SkinnedMeshRenderer meshRenderer;
 
     public enum StateEnum { Idle, Roam, Chase, Attack, Stagger}
     public StateEnum state;
@@ -77,7 +83,7 @@ public class Enemy : MonoBehaviour
         CheckState();
         speed = rb.velocity.magnitude;
         
-        if (playerInSightRange && !playerInAttackRange && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        if (playerInSightRange && !playerInAttackRange && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !isWeak)
         {
             state = StateEnum.Chase;
         }
@@ -94,9 +100,11 @@ public class Enemy : MonoBehaviour
             Die();
         }
 
-        if (health > 0f && health <= 40f)
+        if (health > 0f && health <= 25f)
         {
+            isWeak = true;
             state = StateEnum.Stagger;
+            agent.isStopped = true;
         }
     }
 
@@ -126,7 +134,7 @@ public class Enemy : MonoBehaviour
     {
         agent.SetDestination(transform.position);
 
-        transform.LookAt(target);
+        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
 
         if (!alreadyAttacked)
         {
@@ -146,11 +154,21 @@ public class Enemy : MonoBehaviour
     {
         leftFist.GetComponent<Collider>().enabled = false;
 
-        //change shader
+        meshRenderer.material = staggerColor;
+
+
 
         ChangeAnimationState(DEMON_IDLE);
 
-        isWeak = true;
+        Invoke(nameof(Staggering), staggerTime);
+    }
+
+    void Staggering()
+    {
+        Debug.Log("reset stagger");
+        isWeak = false;
+        agent.isStopped = false;
+        meshRenderer.material = originalColor;
     }
 
     void Attack()

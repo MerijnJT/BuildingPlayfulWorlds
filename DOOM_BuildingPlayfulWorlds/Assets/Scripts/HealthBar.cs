@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
 
+   
+
+    Color vignetteAlpha;
+
     public Slider slider;
     // Start is called before the first frame update
     

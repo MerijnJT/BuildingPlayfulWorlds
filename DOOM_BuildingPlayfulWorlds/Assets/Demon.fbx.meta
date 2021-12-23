@@ -15,6 +15,9 @@ ModelImporter:
   - first:
       74: 51211856141289123
     second: metarig|Idle.002 (1)
+  - first:
+      74: 3168873715677496587
+    second: metarig|Idle (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
