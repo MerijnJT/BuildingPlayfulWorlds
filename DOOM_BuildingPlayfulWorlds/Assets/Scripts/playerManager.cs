@@ -25,11 +25,14 @@ public class playerManager : MonoBehaviour
     public GameObject target;
 
     public float executeDamage = 50;
+    public AudioClip kaboem;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -48,6 +51,8 @@ public class playerManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Execute(target);
+                audioSource.clip = kaboem;
+                audioSource.PlayOneShot(audioSource.clip);
             }
 
 
@@ -88,7 +93,7 @@ public class playerManager : MonoBehaviour
     {
         if(other.gameObject.tag == "Claw")
         {
-            TakeDamage(25);
+            TakeDamage(40);
         }
     }
 
@@ -101,7 +106,7 @@ public class playerManager : MonoBehaviour
         vignette.GetComponent<Bloed>().DAMAGEKRIJGEN(currentHealth);
         if (currentHealth <= 0)
         {
-            FindObjectOfType<Manager>().EndGame();
+            //FindObjectOfType<Manager>().EndGame();
 
             gameOverScreen.SetActive(true);
             Time.timeScale = 0f;

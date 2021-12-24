@@ -17,6 +17,16 @@ public class gun : MonoBehaviour
     public GameObject impact;
     public GameObject blood;
 
+    public AudioSource source;
+    public AudioClip[] audioClips;
+
+
+    private void Awake()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
+
     // Update is called once per frame
     void Update()
     {
@@ -30,10 +40,15 @@ public class gun : MonoBehaviour
 
     public IEnumerator Shoot()
     {
+        muzzle.Play();
+        source.clip = audioClips[Random.Range(0, audioClips.Length)];
+        source.PlayOneShot(source.clip);
         mayShoot = false;
+
         for (int i = 0; i < shots; i++)
         {
-            muzzle.Play();
+            
+
             Vector3 bloom = fpsCam.transform.position + fpsCam.transform.forward * 1000f;
             bloom += Random.Range(-70, 70) * fpsCam.transform.up;
             bloom += Random.Range(-70, 70) * fpsCam.transform.right;

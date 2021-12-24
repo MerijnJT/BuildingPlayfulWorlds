@@ -34,6 +34,11 @@ public class Enemy : MonoBehaviour
 
     public SkinnedMeshRenderer meshRenderer;
 
+    public AudioClip screach;
+    public AudioClip die;
+    private AudioSource audioSource;
+
+  
     public enum StateEnum { Idle, Roam, Chase, Attack, Stagger}
     public StateEnum state;
 
@@ -59,6 +64,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         target = GameObject.Find("FirstPersonCharacter").transform;
+        audioSource = GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -91,6 +97,8 @@ public class Enemy : MonoBehaviour
         {
             state = StateEnum.Attack;
         }
+
+
     }
     public void TakeDamage (float amount)
     {
@@ -111,6 +119,10 @@ public class Enemy : MonoBehaviour
     void Die ()
     {
         FindObjectOfType<Manager>().Explode(explosion, agent.transform.position);
+        audioSource.clip = die;
+        audioSource.PlayOneShot(audioSource.clip);
+        
+        FindObjectOfType<Manager>().GameEnd();
         Destroy(gameObject);
     }
 
